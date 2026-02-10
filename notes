@@ -1,0 +1,335 @@
+
+…or create a new repository on the command line
+
+echo "# daggerAG" >> README.md
+git init
+git add README.md
+git commit -m "first commit"
+git branch -M main
+git remote add origin https://github.com/srdavlin/daggerAG.git
+git push -u origin main
+
+…or push an existing repository from the command line
+
+git remote add origin https://github.com/srdavlin/daggerAG.git
+git branch -M main
+git push -u origin main
+
+
+
+
+
+
+
+helm install dagger-helm . --namespace=dagger --kubeconfig ~/.kube/config --kube-apiserver https://127.0.0.1:33393
+
+NAME: dagger-helm
+LAST DEPLOYED: Sat Feb  7 12:37:12 2026
+NAMESPACE: dagger
+STATUS: deployed
+REVISION: 1
+DESCRIPTION: Install complete
+TEST SUITE: None
+
+
+k get ns
+
+NAME                  STATUS   AGE
+argocd                Active   39d
+dagger                Active   11m
+default               Active   39d
+gitea                 Active   39d
+idpbuilder-localdev   Active   39d
+ingress-nginx         Active   39d
+kube-node-lease       Active   39d
+kube-public           Active   39d
+kube-system           Active   39d
+local-path-storage    Active   39d
+nginx                 Active   39d
+
+k get all -A                                                                                                  12:50 [44/44]
+
+NAMESPACE            NAME                                                    READY   STATUS      RESTARTS       AGE                                                         
+argocd               pod/argocd-application-controller-0                     1/1     Running     37 (81m ago)   39d                                                         
+argocd               pod/argocd-applicationset-controller-54795bdbfc-8fwrh   1/1     Running     37 (81m ago)   39d                                                         
+argocd               pod/argocd-redis-9764cd7bb-k6csp                        1/1     Running     37 (81m ago)   39d                                                         
+argocd               pod/argocd-repo-server-788478b877-q7b2l                 1/1     Running     37 (81m ago)   39d                                                         
+argocd               pod/argocd-server-dbbcc785-jxftq                        1/1     Running     37 (81m ago)   39d                                                         
+dagger               pod/dagger-helm-engine-826m7                            1/1     Running     0              4m7s                                                        
+gitea                pod/my-gitea-79f9ffdc59-lc4fx                           1/1     Running     37 (81m ago)   39d                                                         
+ingress-nginx        pod/ingress-nginx-admission-create-k6vb8                0/1     Completed   0              39d                                                         
+ingress-nginx        pod/ingress-nginx-admission-patch-bnm97                 0/1     Completed   3              39d                                                         
+ingress-nginx        pod/ingress-nginx-controller-69c6644f7f-7m8kh           1/1     Running     37 (81m ago)   39d                                                         
+kube-system          pod/coredns-6454cf9bdb-6d58n                            1/1     Running     37 (81m ago)   39d                                                         
+kube-system          pod/coredns-6454cf9bdb-h78nd                            1/1     Running     37 (81m ago)   39d                                                         
+kube-system          pod/etcd-localdev-control-plane                         1/1     Running     37 (81m ago)   39d                                                         
+kube-system          pod/kindnet-kqsjq                                       1/1     Running     37 (81m ago)   39d                                                         
+kube-system          pod/kube-apiserver-localdev-control-plane               1/1     Running     37 (81m ago)   39d                                                         
+kube-system          pod/kube-controller-manager-localdev-control-plane      1/1     Running     37 (81m ago)   39d                                                         
+kube-system          pod/kube-proxy-b2zvs                                    1/1     Running     37 (81m ago)   39d                                                         
+kube-system          pod/kube-scheduler-localdev-control-plane               1/1     Running     37 (81m ago)   39d                                                         
+local-path-storage   pod/local-path-provisioner-7dc846544d-p542q             1/1     Running     73 (80m ago)   39d 
+
+NAMESPACE       NAME                                              TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)                                     AGE                 
+argocd          service/argocd-applicationset-controller          ClusterIP   10.96.253.7     <none>        7000/TCP,8080/TCP                           39d                 
+argocd          service/argocd-dex-server                         ClusterIP   10.96.111.232   <none>        5556/TCP,5557/TCP,5558/TCP                  39d                 
+argocd          service/argocd-metrics                            ClusterIP   10.96.139.226   <none>        8082/TCP                                    39d                 
+argocd          service/argocd-notifications-controller-metrics   ClusterIP   10.96.21.225    <none>        9001/TCP                                    39d                 
+argocd          service/argocd-redis                              ClusterIP   10.96.205.112   <none>        6379/TCP                                    39d                 
+argocd          service/argocd-repo-server                        ClusterIP   10.96.105.6     <none>        8081/TCP,8084/TCP                           39d                 
+argocd          service/argocd-server                             ClusterIP   10.96.3.196     <none>        80/TCP,443/TCP                              39d                 
+argocd          service/argocd-server-metrics                     ClusterIP   10.96.190.92    <none>        8083/TCP                                    39d
+default         service/kubernetes                                ClusterIP   10.96.0.1       <none>        443/TCP                                     39d
+gitea           service/my-gitea-http                             NodePort    10.96.120.245   <none>        3000:32223/TCP                              39d
+gitea           service/my-gitea-ssh                              NodePort    10.96.176.102   <none>        32222:32222/TCP                             39d
+ingress-nginx   service/ingress-nginx-controller                  NodePort    10.96.71.82     <none>        8443:32274/TCP,80:30656/TCP,443:30755/TCP   39d
+ingress-nginx   service/ingress-nginx-controller-admission        ClusterIP   10.96.155.96    <none>        443/TCP                                     39d
+kube-system     service/kube-dns                                  ClusterIP   10.96.0.10      <none>        53/UDP,53/TCP,9153/TCP                      39d
+
+NAMESPACE     NAME                                DESIRED   CURRENT   READY   UP-TO-DATE   AVAILABLE   NODE SELECTOR            AGE
+dagger        daemonset.apps/dagger-helm-engine   1         1         1       1            1           <none>                   4m7s
+kube-system   daemonset.apps/kindnet              1         1         1       1            1           kubernetes.io/os=linux   39d
+kube-system   daemonset.apps/kube-proxy           1         1         1       1            1           kubernetes.io/os=linux   39d
+
+NAMESPACE            NAME                                               READY   UP-TO-DATE   AVAILABLE   AGE                                                                
+argocd               deployment.apps/argocd-applicationset-controller   1/1     1            1           39d                                                                
+argocd               deployment.apps/argocd-dex-server                  0/0     0            0           39d
+argocd               deployment.apps/argocd-notifications-controller    0/0     0            0           39d
+argocd               deployment.apps/argocd-redis                       1/1     1            1           39d
+argocd               deployment.apps/argocd-repo-server                 1/1     1            1           39d
+argocd               deployment.apps/argocd-server                      1/1     1            1           39d
+gitea                deployment.apps/my-gitea                           1/1     1            1           39d
+ingress-nginx        deployment.apps/ingress-nginx-controller           1/1     1            1           39d
+kube-system          deployment.apps/coredns                            2/2     2            2           39d
+local-path-storage   deployment.apps/local-path-provisioner             1/1     1            1           39d
+
+NAMESPACE            NAME                                                          DESIRED   CURRENT   READY   AGE
+argocd               replicaset.apps/argocd-applicationset-controller-54795bdbfc   1         1         1       39d
+argocd               replicaset.apps/argocd-dex-server-8497c9977c                  0         0         0       39d
+argocd               replicaset.apps/argocd-notifications-controller-67c554878b    0         0         0       39d
+argocd               replicaset.apps/argocd-redis-9764cd7bb                        1         1         1       39d
+argocd               replicaset.apps/argocd-repo-server-788478b877                 1         1         1       39d
+argocd               replicaset.apps/argocd-server-dbbcc785                        1         1         1       39d
+gitea                replicaset.apps/my-gitea-79f9ffdc59                           1         1         1       39d
+ingress-nginx        replicaset.apps/ingress-nginx-controller-69c6644f7f           1         1         1       39d
+kube-system          replicaset.apps/coredns-6454cf9bdb                            2         2         2       39d
+local-path-storage   replicaset.apps/local-path-provisioner-7dc846544d             1         1         1       39d
+
+NAMESPACE   NAME                                             READY   AGE
+argocd      statefulset.apps/argocd-application-controller   1/1     39d
+
+NAMESPACE       NAME                                       STATUS     COMPLETIONS   DURATION   AGE
+ingress-nginx   job.batch/ingress-nginx-admission-create   Complete   1/1           53s        39d
+ingress-nginx   job.batch/ingress-nginx-admission-patch    Complete   1/1           75s        39d
+
+
+k describe daemonset/dagger-helm-engine --namespace=dagger
+
+Name:           dagger-helm-engine                                                                                                                             13:05 [18/21]
+Namespace:      dagger                                                                                                                                                      
+Selector:       name=dagger-helm-engine                                                                                                                                     
+Node-Selector:  <none>                                                                                                                                                      
+Labels:         app.kubernetes.io/instance=dagger-helm                                                                                                                      
+                app.kubernetes.io/managed-by=Helm                                                                                                                           
+                app.kubernetes.io/name=dagger-helm                                                                                                                          
+                app.kubernetes.io/part-of=dagger-helm                                                                                                                       
+                app.kubernetes.io/version=v0.19.11                                                                                                                          
+                helm.sh/chart=dagger-helm-0.19.11                                                                                                                           
+Annotations:    deprecated.daemonset.template.generation: 1                                                                                                                 
+                meta.helm.sh/release-name: dagger-helm                                                                                                                      
+                meta.helm.sh/release-namespace: dagger                                                                                                                      
+Desired Number of Nodes Scheduled: 1                                                                                                                                        
+Current Number of Nodes Scheduled: 1                                                                                                                                        
+Number of Nodes Scheduled with Up-to-date Pods: 1                                                                                                                           
+Number of Nodes Scheduled with Available Pods: 1                                                                                                                            
+Number of Nodes Misscheduled: 0                                                                                                                                             
+Pods Status:  1 Running / 0 Waiting / 0 Succeeded / 0 Failed                                                                                                                
+Pod Template:                                                                                                                                                               
+  Labels:           app.kubernetes.io/instance=dagger-helm                                                                                                                  
+                    app.kubernetes.io/managed-by=Helm                                                                                                                       
+                    app.kubernetes.io/name=dagger-helm                                                                                                                      
+                    app.kubernetes.io/part-of=dagger-helm                                                                                                                   
+                    app.kubernetes.io/version=v0.19.11                                                                                                                      
+                    helm.sh/chart=dagger-helm-0.19.11                                                                                                                       
+                    name=dagger-helm-engine                                                                                                                                 
+  Service Account:  default                                                                                                                                                 
+  Containers:                                                                                                                                                               
+   dagger-engine:                          
+    Image:        registry.dagger.io/engine:v0.19.11
+    Port:         <none>
+    Host Port:    <none>                                                              
+    Liveness:     exec [sh -exc dagger core version] delay=5s timeout=29s period=30s #success=1 #failure=20
+    Readiness:    exec [sh -exc dagger core version] delay=5s timeout=14s period=15s #success=1 #failure=10
+    Environment:  <none>
+    Mounts:
+      /run/dagger from varrundagger (rw)
+      /var/lib/dagger from varlibdagger (rw)
+  Volumes:
+   varlibdagger:
+    Type:          HostPath (bare host directory volume)
+    Path:          /var/lib/dagger-dagger-helm
+    HostPathType:  
+   varrundagger:
+    Type:          HostPath (bare host directory volume)
+    Path:          /run/dagger-dagger-helm
+    HostPathType:  
+  Node-Selectors:  <none>
+Events:
+  Type    Reason            Age   From                  Message
+  ----    ------            ----  ----                  -------
+  Normal  SuccessfulCreate  19m   daemonset-controller  Created pod: dagger-helm-engine-826m7
+
+
+
+[n30@blue-goo:~/Downloads/DaggerAG/dagger-helm]$ DAGGER_ENGINE_POD_NAME="$(k get pod \                                                                                
+    --selector=name=dagger-helm-engine --namespace=dagger \
+    --output=jsonpath='{.items[0].metadata.name}')"
+[n30@blue-goo:~/Downloads/DaggerAG/dagger-helm]$ export DAGGER_ENGINE_POD_NAME
+[n30@blue-goo:~/Downloads/DaggerAG/dagger-helm]$ echo $DAGGER_ENGINE_POD_NAME
+dagger-helm-engine-826m7
+
+
+[n30@blue-goo:~/Downloads/DaggerAG/dagger-helm]$ _EXPERIMENTAL_DAGGER_RUNNER_HOST="kube-pod://$DAGGER_ENGINE_POD_NAME?namespace=dagger"
+export _EXPERIMENTAL_DAGGER_RUNNER_HOST
+[n30@blue-goo:~/Downloads/DaggerAG/dagger-helm]$ 
+[n30@blue-goo:~/Downloads/DaggerAG/dagger-helm]$ echo $_EXPERIMENTAL_DAGGER_RUNNER_HOST
+kube-pod://dagger-helm-engine-826m7?namespace=dagger
+
+
+**TST pod instance of DAGGER in CLUSTER** 
+Run an operation that shows the kernel info of the node where the Dagger engine is running:
+
+
+
+dagger query <<EOF
+{
+    container {
+        from(address:"alpine") {
+            withExec(args: ["uname", "-a"]) { stdout }
+        }
+    }
+}
+EOF
+
+**ERROR**
+
+      ! connection error: desc = "error reading server preface: command [kubectl --context= --namespace=dagger exec --container= -i dagger-helm-engine-826m7 -- buildctl
+        dial-stdio] has exited with exit status 1, make sure the URL is valid, and Docker 18.09 or later is installed on the remote host: stderr=E0207 13:36:36.273552
+        90598 memcache.go:265] \"Unhandled Error\" err=\"couldn't get current server API group list: Get \\\"https://localdev-control-plane:6443/api?timeout=32s\\\": dial
+        tcp [::1]:6443: connect: connection refused\"\nE0207 13:36:36.275062   90598 memcache.go:265] \"Unhandled Error\" err=\"couldn't get current server API group list:
+        Get \\\"https://localdev-control-plane:6443/api?timeout=32s\\\": dial tcp [::1]:6443: connect: connection refused\"\nE0207 13:36:36.276719   90598 memcache.go:265]
+        \"Unhandled Error\" err=\"couldn't get current server API group list: Get \\\"https://localdev-control-plane:6443/api?timeout=32s\\\": dial tcp [::1]:6443: connect:
+        connection refused\"\nE0207 13:36:36.278211   90598 memcache.go:265] \"Unhandled Error\" err=\"couldn't get current server API group list: Get \\\"https://localdev-
+        control-plane:6443/api?timeout=32s\\\": dial tcp [::1]:6443: connect: connection refused\"\nThe connection to the server localdev-control-plane:6443 was refused -
+        did you specify the right host or port?\n"
+
+
+[n30@blue-goo:~/Downloads/DaggerAG/dagger-helm]$ dagger version
+dagger v0.19.11 (kube-pod://dagger-helm-engine-826m7?namespace=dagger) linux/amd64
+
+Versus
+
+[n30@blue-goo:~/Downloads/DaggerAG]$ dagger version
+dagger v0.19.11 (image://registry.dagger.io/engine:v0.19.11) linux/amd64
+
+
+
+
+
+** RAN from Native Host Command line 
+
+dagger query <<EOF
+{
+    container {
+        from(address:"alpine") {
+            withExec(args: ["uname", "-a"]) { stdout }
+        }
+    }
+}
+EOF
+✔ connect 0.5s
+
+✔ moduleSource(refString: ".", allowNotExists: true): ModuleSource! 0.1s
+✔ .configExists: Boolean! 0.0s
+
+✔ container: Container! 0.0s
+✔ .from(address: "alpine"): Container! 1.3s
+✔ withExec uname -a 1.5s
+✔ .stdout: String! 1.6s
+
+{
+    "container": {
+        "from": {
+            "withExec": {
+                "stdout": "Linux dagger 6.12.0-192.el10.x86_64 #1 SMP PREEMPT_DYNAMIC Mon Jan 26 12:15:11 UTC 2026 x86_64 Linux\n"
+            }
+        }
+    }
+}
+
+Full trace at https://dagger.cloud/srd-n-associates-llc/traces/e5d68fe9046e563c3e724f44479a889c
+
+
+
+** Local Kind cluster 
+
+
+[n30@blue-goo:~]$ k get po -n dagger
+NAME                       READY   STATUS    RESTARTS   AGE
+dagger-helm-engine-826m7   1/1     Running   0          162m
+
+[n30@blue-goo:~]$ k exec -n dagger -it dagger-helm-engine-826m7 -- /bin/sh
+/ # uname -a
+Linux dagger-helm-engine-826m7 6.12.0-192.el10.x86_64 #1 SMP PREEMPT_DYNAMIC Mon Jan 26 12:15:11 UTC 2026 x86_64 GNU/Linux
+/ # exit
+
+
+
+** Ran from remote cluster with NINE NODES
+
+n30@odin-0101:~$ k get po -n dagger                                                                                                                                         
+NAME                              READY   STATUS    RESTARTS      AGE                                                                                                       
+dagger-dagger-helm-engine-4jk27   1/1     Running   1 (22d ago)   115d                                                                                                      
+dagger-dagger-helm-engine-5xm45   1/1     Running   1 (22d ago)   115d                                                                                                      
+dagger-dagger-helm-engine-6bllt   1/1     Running   2 (22d ago)   115d
+dagger-dagger-helm-engine-fcgf2   1/1     Running   2 (21d ago)   115d
+dagger-dagger-helm-engine-mbqft   1/1     Running   3 (22d ago)   115d
+dagger-dagger-helm-engine-rwnvn   1/1     Running   1 (22d ago)   115d
+dagger-dagger-helm-engine-vxwh4   1/1     Running   1 (21d ago)   115d
+dagger-dagger-helm-engine-z568f   1/1     Running   1 (21d ago)   115d
+
+n30@odin-0101:~$ k exec -n dagger -it dagger-dagger-helm-engine-5xm45 -- /bin/sh
+/ # uname -a
+Linux dagger-dagger-helm-engine-5xm45 6.14.0-37-generic #37~24.04.1-Ubuntu SMP PREEMPT_DYNAMIC Thu Nov 20 10:25:38 UTC 2 x86_64 Linux
+/ # exit
+
+n30@odin-0101:~$ k exec -n dagger -it dagger-dagger-helm-engine-6bllt -- /bin/sh
+/ # uname -a
+Linux dagger-dagger-helm-engine-6bllt 6.14.0-37-generic #37~24.04.1-Ubuntu SMP PREEMPT_DYNAMIC Thu Nov 20 10:25:38 UTC 2 x86_64 Linux
+/ # exit
+
+n30@odin-0101:~$ k exec -n dagger -it dagger-dagger-helm-engine-fcgf2 -- /bin/sh
+/ # uname -a
+Linux dagger-dagger-helm-engine-fcgf2 6.14.0-37-generic #37~24.04.1-Ubuntu SMP PREEMPT_DYNAMIC Thu Nov 20 10:25:38 UTC 2 x86_64 Linux
+/ # exit
+
+n30@odin-0101:~$ k exec -n dagger -it dagger-dagger-helm-engine-mbqft -- /bin/sh
+/ # uname -a
+Linux dagger-dagger-helm-engine-mbqft 6.14.0-37-generic #37~24.04.1-Ubuntu SMP PREEMPT_DYNAMIC Thu Nov 20 10:25:38 UTC 2 x86_64 Linux
+/ # exit
+
+n30@odin-0101:~$ k exec -n dagger -it dagger-dagger-helm-engine-rwnvn -- /bin/sh
+/ # uname -a
+Linux dagger-dagger-helm-engine-rwnvn 6.14.0-37-generic #37~24.04.1-Ubuntu SMP PREEMPT_DYNAMIC Thu Nov 20 10:25:38 UTC 2 x86_64 Linux
+/ # exit
+
+n30@odin-0101:~$ k exec -n dagger -it dagger-dagger-helm-engine-vxwh4 -- /bin/sh
+/ # uname -a
+Linux dagger-dagger-helm-engine-vxwh4 6.14.0-37-generic #37~24.04.1-Ubuntu SMP PREEMPT_DYNAMIC Thu Nov 20 10:25:38 UTC 2 x86_64 Linux
+/ # exit
+
+n30@odin-0101:~$ k exec -n dagger -it dagger-dagger-helm-engine-z568f -- /bin/sh
+/ # uname -a
+Linux dagger-dagger-helm-engine-z568f 6.14.0-37-generic #37~24.04.1-Ubuntu SMP PREEMPT_DYNAMIC Thu Nov 20 10:25:38 UTC 2 x86_64 Linux
+/ # exit
+
