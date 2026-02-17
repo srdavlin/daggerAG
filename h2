@@ -1,0 +1,3 @@
+cat large.tar.part* > large.tar
+
+You can then extract the original archive with tar -xvf large.tar
