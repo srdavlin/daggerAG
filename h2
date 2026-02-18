@@ -1,3 +1,13 @@
 cat large.tar.part* > large.tar
 
 You can then extract the original archive with tar -xvf large.tar
+
+3. Installation in Air-Gapped Environment
+Install CLI: Move the Dagger binary to a location in your PATH (e.g., /usr/local/bin).
+Load Engine Image: Load the engine image into your local container runtime:
+
+docker load -i dagger-engine.tar
+
+Configure Local Registry: Because the CLI will try to pull the engine image by default, you must configure Dagger to use the locally loaded image.
+
+Set the _EXPERIMENTAL_DAGGERENGINEIMAGE environment variable to point to your loaded image, or ensure your local container registry mirrors registry.dagger.io/engine.
